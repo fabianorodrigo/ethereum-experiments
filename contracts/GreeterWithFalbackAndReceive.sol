@@ -10,7 +10,6 @@ contract GreeterWithFallbackAndReceive {
     event Receive(uint256 value, bytes data);
 
     constructor(string memory _greeting) {
-        console.log("Deploying a Greeter with greeting:", _greeting);
         greeting = _greeting;
     }
 
@@ -19,7 +18,6 @@ contract GreeterWithFallbackAndReceive {
     }
 
     function setGreeting(string memory _greeting) public {
-        console.log("Changing greeting from '%s' to '%s'", greeting, _greeting);
         greeting = _greeting;
     }
 
