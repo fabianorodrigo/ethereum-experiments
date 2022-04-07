@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { Signer } from "ethers";
-import { ethers } from "hardhat";
+import { ethers, waffle } from "hardhat";
 
 describe("Greeter", function () {
   let accounts: Signer[] = [];
@@ -29,9 +29,20 @@ describe("Greeter", function () {
     const greeter = await Greeter.deploy("Hello, world!");
     await greeter.deployed();
 
-    const receipt = await accounts[0].sendTransaction({
-      to: greeter.address,
-      value: 100,
-    });
+    const greeterETherBalance = await waffle.provider.getBalance(
+      greeter.address
+    );
+    // revertedWith returns Chai.AsyncAssertion, so need to use of `await`
+    await expect(
+      accounts[0].sendTransaction({
+        to: greeter.address,
+        value: 100,
+      })
+    ).revertedWith(
+      `function selector was not recognized and there's no fallback nor receive function`
+    );
+    expect(await waffle.provider.getBalance(greeter.address)).to.be.equal(
+      greeterETherBalance
+    );
   });
 });
