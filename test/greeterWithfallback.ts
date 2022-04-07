@@ -11,7 +11,7 @@ describe("GreeterWithFallback", function () {
     addressAccountZero = await accounts[0].getAddress();
   });
 
-  it(`Should be possible send Ether to a contract without 'receive' but with 'fallback'`, async () => {
+  it(`Should be possible send Ether to a contract without 'receive' but with payable 'fallback' when transaction DOES NOT have data`, async () => {
     const Greeter = await ethers.getContractFactory("GreeterWithFallback");
     const greeter = await Greeter.deploy("Hello, world!");
     await greeter.deployed();
@@ -40,13 +40,11 @@ describe("GreeterWithFallback", function () {
     );
   });
 
-  it(`Should NOT be possible send Ether to a contract without 'receive' and with NOT PAYABLE 'fallback'`, async () => {
-    const Greeter = await ethers.getContractFactory(
-      "GreeterWithFallbackNotPayable"
-    );
+  it(`Should be possible send Ether to a contract without 'receive' but with payable 'fallback' when transaction HAS data`, async () => {
+    const Greeter = await ethers.getContractFactory("GreeterWithFallback");
     const greeter = await Greeter.deploy("Hello, world!");
     await greeter.deployed();
-    const VALUE = 777;
+    const VALUE = 99;
 
     const greeterETherBalance = await waffle.provider.getBalance(
       greeter.address
@@ -55,20 +53,20 @@ describe("GreeterWithFallback", function () {
       addressAccountZero
     );
     // revertedWith returns Chai.AsyncAssertion, so need to use of `await`
-    await expect(
-      accounts[0].sendTransaction({
-        to: greeter.address,
-        value: VALUE,
-      })
-    ).revertedWith(
-      `there's no receive function, fallback function is not payable and was called with value ${VALUE}`
-    );
-
+    const receipt = await accounts[0].sendTransaction({
+      to: greeter.address,
+      value: VALUE,
+      data: ethers.utils.formatBytes32String(`Here is my data, mister Receive`),
+    });
+    await receipt.wait();
+    // console.log(receipt);
+    expect(receipt).to.emit(Greeter, "Fallback");
     expect(await waffle.provider.getBalance(greeter.address)).to.be.equal(
-      greeterETherBalance
+      greeterETherBalance.add(VALUE)
     );
-    expect(await waffle.provider.getBalance(addressAccountZero)).to.be.equal(
-      accounts0Balance
+    //It has to be less than the initial balance because of gas consuption
+    expect(await waffle.provider.getBalance(addressAccountZero)).to.be.below(
+      accounts0Balance.sub(VALUE)
     );
   });
 });
