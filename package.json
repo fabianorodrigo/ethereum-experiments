@@ -4,7 +4,8 @@
     "start": "echo \"Error: no start specified\" && exit 1",
     "clean": "npx hardhat clean",
     "build": "npx hardhat compile",
-    "test": "npx hardhat test"
+    "test": "npx hardhat test",
+    "coverage": "npx hardhat coverage"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
