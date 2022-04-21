@@ -5,7 +5,11 @@
     "clean": "npx hardhat clean",
     "build": "npx hardhat compile",
     "test": "npx hardhat test",
-    "coverage": "npx hardhat coverage"
+    "coverage": "npx hardhat coverage",
+    "solcopcodes": "solc contratcts/HelloWorld.sol --opcodes",
+    "solcasm": "solc contratcts/HelloWorld.sol --asm",
+    "solcdevdoc":"solc contratcts/HelloWorld.sol --devdoc",
+    "solcstoragelayout": "solc contratcts/HelloWorld.sol --storage-layout"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
