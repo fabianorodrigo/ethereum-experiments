@@ -15,7 +15,7 @@ contract Greeting {
 contract Helper2 {
     string public greeting = "hello";
 
-    function getGreeting() public pure returns (string memory) {
+    function getGreeting() public view returns (string memory) {
         return "hello";
     }
 }

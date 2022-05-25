@@ -20,6 +20,11 @@ describe("Greeting DelegateCall", function () {
     let tx = await _greetingContract.greeting(_helperContract.address);
     await tx.wait();
     console.log(tx);
-    //expect(await _greetingContract.greeting()).to.equal("hello");
+    // Get the storage at storage slot 0,1
+    const slot0Bytes = await ethers.provider.getStorageAt(
+      _greetingContract.address,
+      0
+    );
+    expect(ethers.utils.parseBytes32String(slot0Bytes)).to.equal("hello");
   });
 });
