@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { Signer } from "ethers";
-import { ethers, waffle } from "hardhat";
+import { ethers } from "hardhat";
 
 describe("GreeterWithFallbackNotPayable", function () {
   let accounts: Signer[] = [];
@@ -19,10 +19,10 @@ describe("GreeterWithFallbackNotPayable", function () {
     await greeter.deployed();
     const VALUE = 777;
 
-    const greeterETherBalance = await waffle.provider.getBalance(
+    const greeterETherBalance = await greeter.provider.getBalance(
       greeter.address
     );
-    const accounts0Balance = await waffle.provider.getBalance(
+    const accounts0Balance = await greeter.provider.getBalance(
       addressAccountZero
     );
     // revertedWith returns Chai.AsyncAssertion, so need to use of `await`
@@ -35,10 +35,10 @@ describe("GreeterWithFallbackNotPayable", function () {
       `there's no receive function, fallback function is not payable and was called with value ${VALUE}`
     );
 
-    expect(await waffle.provider.getBalance(greeter.address)).to.be.equal(
+    expect(await greeter.provider.getBalance(greeter.address)).to.be.equal(
       greeterETherBalance
     );
-    expect(await waffle.provider.getBalance(addressAccountZero)).to.be.equal(
+    expect(await greeter.provider.getBalance(addressAccountZero)).to.be.equal(
       accounts0Balance
     );
   });
@@ -51,10 +51,10 @@ describe("GreeterWithFallbackNotPayable", function () {
     await greeter.deployed();
     const VALUE = 777;
 
-    const greeterETherBalance = await waffle.provider.getBalance(
+    const greeterETherBalance = await greeter.provider.getBalance(
       greeter.address
     );
-    const accounts0Balance = await waffle.provider.getBalance(
+    const accounts0Balance = await greeter.provider.getBalance(
       addressAccountZero
     );
     // revertedWith returns Chai.AsyncAssertion, so need to use of `await`
@@ -70,10 +70,10 @@ describe("GreeterWithFallbackNotPayable", function () {
       `fallback function is not payable and was called with value ${VALUE}`
     );
 
-    expect(await waffle.provider.getBalance(greeter.address)).to.be.equal(
+    expect(await greeter.provider.getBalance(greeter.address)).to.be.equal(
       greeterETherBalance
     );
-    expect(await waffle.provider.getBalance(addressAccountZero)).to.be.equal(
+    expect(await greeter.provider.getBalance(addressAccountZero)).to.be.equal(
       accounts0Balance
     );
   });

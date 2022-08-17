@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { Signer } from "ethers";
-import { ethers, waffle } from "hardhat";
+import { ethers } from "hardhat";
 
 describe("NonAbstractContract", function () {
   let accounts: Signer[] = [];

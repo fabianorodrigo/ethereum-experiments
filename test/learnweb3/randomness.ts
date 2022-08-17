@@ -41,6 +41,8 @@ describe("Randomness Attack", function () {
     console.log("Attack contract's address:", _attack.address);
 
     // Attack the Game Contract
+
+    //console.log(await _attack.attack({ gasLimit: 1 }));
     await expect(_attack.attack({ gasLimit: 21064 })).to.be.revertedWith(
       "TransactionExecutionError: Transaction ran out of gas"
     );

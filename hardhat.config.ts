@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 
+import "@nomicfoundation/hardhat-toolbox";
 import "@nomiclabs/hardhat-etherscan";
-import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
 import "hardhat-gas-reporter";
 import { HardhatUserConfig } from "hardhat/config";

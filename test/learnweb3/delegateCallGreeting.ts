@@ -1,6 +1,5 @@
 import { expect } from "chai";
-import { BigNumber } from "ethers";
-import { ethers, waffle } from "hardhat";
+import { ethers } from "hardhat";
 
 describe("Greeting DelegateCall", function () {
   it("Should return greeting", async function () {

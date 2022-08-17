@@ -1,6 +1,5 @@
 import { expect } from "chai";
-import { BigNumber } from "ethers";
-import { ethers, waffle } from "hardhat";
+import { ethers } from "hardhat";
 
 describe("Attack", function () {
   it("Should change the owner of the Good contract", async function () {

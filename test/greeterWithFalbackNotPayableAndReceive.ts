@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { Signer } from "ethers";
-import { ethers, waffle } from "hardhat";
+import { ethers } from "hardhat";
 
 describe("GreeterWithFalbackNotPayableAndReceive", function () {
   let accounts: Signer[] = [];
@@ -19,10 +19,10 @@ describe("GreeterWithFalbackNotPayableAndReceive", function () {
     await greeter.deployed();
     const VALUE = 167;
 
-    const greeterETherBalance = await waffle.provider.getBalance(
+    const greeterETherBalance = await greeter.provider.getBalance(
       greeter.address
     );
-    const accounts0Balance = await waffle.provider.getBalance(
+    const accounts0Balance = await greeter.provider.getBalance(
       addressAccountZero
     );
     // revertedWith returns Chai.AsyncAssertion, so need to use of `await`
@@ -33,11 +33,11 @@ describe("GreeterWithFalbackNotPayableAndReceive", function () {
     await receipt.wait();
     // console.log(receipt);
     expect(receipt).to.emit(Greeter, "Receive");
-    expect(await waffle.provider.getBalance(greeter.address)).to.be.equal(
+    expect(await greeter.provider.getBalance(greeter.address)).to.be.equal(
       greeterETherBalance.add(VALUE)
     );
     //It has to be less than the initial balance because of gas consuption
-    expect(await waffle.provider.getBalance(addressAccountZero)).to.be.below(
+    expect(await greeter.provider.getBalance(addressAccountZero)).to.be.below(
       accounts0Balance.sub(VALUE)
     );
   });
@@ -48,10 +48,10 @@ describe("GreeterWithFalbackNotPayableAndReceive", function () {
     await greeter.deployed();
     const VALUE = 1919;
 
-    const greeterETherBalance = await waffle.provider.getBalance(
+    const greeterETherBalance = await greeter.provider.getBalance(
       greeter.address
     );
-    const accounts0Balance = await waffle.provider.getBalance(
+    const accounts0Balance = await greeter.provider.getBalance(
       addressAccountZero
     );
     // revertedWith returns Chai.AsyncAssertion, so need to use of `await`
@@ -67,10 +67,10 @@ describe("GreeterWithFalbackNotPayableAndReceive", function () {
       `function selector was not recognized and there's no fallback function`
     );
 
-    expect(await waffle.provider.getBalance(greeter.address)).to.be.equal(
+    expect(await greeter.provider.getBalance(greeter.address)).to.be.equal(
       greeterETherBalance
     );
-    expect(await waffle.provider.getBalance(addressAccountZero)).to.be.equal(
+    expect(await greeter.provider.getBalance(addressAccountZero)).to.be.equal(
       accounts0Balance
     );
   });
