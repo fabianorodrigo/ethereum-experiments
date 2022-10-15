@@ -31,9 +31,10 @@ describe("GreeterWithFallbackNotPayable", function () {
         to: greeter.address,
         value: VALUE,
       })
-    ).to.be.rejectedWith(
-      `there's no receive function, fallback function is not payable and was called with value ${VALUE}`
-    );
+    ) // Valida a mensagem de erro retornada pela Hardhat Network: https://github.com/NomicFoundation/hardhat/blob/main/packages/hardhat-core/src/internal/hardhat-network/stack-traces/solidity-errors.ts
+      .to.be.rejectedWith(
+        `there's no receive function, fallback function is not payable and was called with value ${VALUE}`
+      );
 
     expect(await greeter.provider.getBalance(greeter.address)).to.be.equal(
       greeterETherBalance
@@ -66,9 +67,10 @@ describe("GreeterWithFallbackNotPayable", function () {
           `Here is my data, mister Receive`
         ),
       })
-    ).to.be.rejectedWith(
-      `fallback function is not payable and was called with value ${VALUE}`
-    );
+    ) // Valida a mensagem de erro retornada pela Hardhat Network: https://github.com/NomicFoundation/hardhat/blob/main/packages/hardhat-core/src/internal/hardhat-network/stack-traces/solidity-errors.ts
+      .to.be.rejectedWith(
+        `fallback function is not payable and was called with value ${VALUE}`
+      );
 
     expect(await greeter.provider.getBalance(greeter.address)).to.be.equal(
       greeterETherBalance

@@ -63,9 +63,10 @@ describe("GreeterWithFalbackNotPayableAndReceive", function () {
           `Here is my data, mister Receive`
         ),
       })
-    ).to.be.rejectedWith(
-      `function selector was not recognized and there's no fallback function`
-    );
+    ) // Valida a mensagem de erro retornada pela Hardhat Network: https://github.com/NomicFoundation/hardhat/blob/main/packages/hardhat-core/src/internal/hardhat-network/stack-traces/solidity-errors.ts
+      .to.be.rejectedWith(
+        `function selector was not recognized and there's no fallback function`
+      );
 
     expect(await greeter.provider.getBalance(greeter.address)).to.be.equal(
       greeterETherBalance

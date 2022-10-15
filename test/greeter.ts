@@ -38,9 +38,11 @@ describe("Greeter", function () {
         to: greeter.address,
         value: 100,
       })
-    ).to.be.rejectedWith(
-      `function selector was not recognized and there's no fallback nor receive function`
-    );
+    )
+      // Valida a mensagem de erro retornada pela Hardhat Network: https://github.com/NomicFoundation/hardhat/blob/main/packages/hardhat-core/src/internal/hardhat-network/stack-traces/solidity-errors.ts
+      .to.be.rejectedWith(
+        `function selector was not recognized and there's no fallback nor receive function`
+      );
     expect(await greeter.provider.getBalance(greeter.address)).to.be.equal(
       greeterETherBalance
     );
