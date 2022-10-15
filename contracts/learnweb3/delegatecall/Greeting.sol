@@ -3,6 +3,8 @@
 pragma solidity ^0.8.0;
 
 contract Greeting {
+    string public slotzeroVar = "hello";
+
     function greeting(address helper) public returns (string memory) {
         (bool success, bytes memory result) = helper.delegatecall(
             abi.encodeWithSignature("getGreeting()")
@@ -13,8 +15,6 @@ contract Greeting {
 }
 
 contract Helper2 {
-    string public greeting = "hello";
-
     function getGreeting() public view returns (string memory) {
         return "hello";
     }

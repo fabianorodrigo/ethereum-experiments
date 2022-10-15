@@ -31,7 +31,7 @@ describe("GreeterWithFallbackNotPayable", function () {
         to: greeter.address,
         value: VALUE,
       })
-    ).revertedWith(
+    ).to.be.rejectedWith(
       `there's no receive function, fallback function is not payable and was called with value ${VALUE}`
     );
 
@@ -66,7 +66,7 @@ describe("GreeterWithFallbackNotPayable", function () {
           `Here is my data, mister Receive`
         ),
       })
-    ).revertedWith(
+    ).to.be.rejectedWith(
       `fallback function is not payable and was called with value ${VALUE}`
     );
 

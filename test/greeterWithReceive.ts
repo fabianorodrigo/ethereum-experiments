@@ -96,7 +96,7 @@ describe("GreeterWithFallbackAndReceive", function () {
           `Here is my data, mister Receive`
         ),
       })
-    ).revertedWith(
+    ).to.be.rejectedWith(
       `function selector was not recognized and there's no fallback function`
     );
 

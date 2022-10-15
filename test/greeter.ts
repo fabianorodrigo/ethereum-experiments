@@ -38,7 +38,7 @@ describe("Greeter", function () {
         to: greeter.address,
         value: 100,
       })
-    ).revertedWith(
+    ).to.be.rejectedWith(
       `function selector was not recognized and there's no fallback nor receive function`
     );
     expect(await greeter.provider.getBalance(greeter.address)).to.be.equal(
