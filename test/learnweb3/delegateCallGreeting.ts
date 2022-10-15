@@ -18,12 +18,23 @@ describe("Greeting DelegateCall", function () {
     // Start the attack
     let tx = await _greetingContract.greeting(_helperContract.address);
     await tx.wait();
-    console.log(tx);
-    // Get the storage at storage slot 0,1
+    //console.log(tx);
+    // Get the storage at storage slot 0 of _greetingContract's address
     const slot0Bytes = await ethers.provider.getStorageAt(
       _greetingContract.address,
       0
     );
-    expect(ethers.utils.parseBytes32String(slot0Bytes)).to.equal("hello");
+    //TODO: entender porque o slot capturado pelo ethersjs já não vem com o tal do "null-termination" (posição 31 do array)
+    console.log("slot0Bytes:", slot0Bytes, slot0Bytes.length);
+    const slot0BytesArrayfied = ethers.utils.arrayify(slot0Bytes);
+    console.log(
+      "slot0BytesArrayfied:",
+      slot0BytesArrayfied,
+      slot0BytesArrayfied.length
+    );
+    const slot0BytesStr = ethers.utils.parseBytes32String(slot0Bytes);
+    console.log("slot0BytesStr:", slot0BytesStr, slot0BytesStr.length);
+
+    expect(slot0BytesStr).to.equal("hello");
   });
 });
