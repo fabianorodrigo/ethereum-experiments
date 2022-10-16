@@ -1,0 +1,16 @@
+ledger:
+  path: 1
+  connect: false
+log: 3
+testNetwork: hardhat
+contract:
+  IdentityNTT:
+    - networks:
+        hardhat: ""
+        # para fazer o redeploy em um novo endereço em uma determinada rede,
+        # apague/comente a respectiva linha da rede
+        # mumbai: '0xFB30e6D32525454aBc9805D8D9faa4C51d5DD555'
+      args:
+        name: "Lift Identity"
+        symbol: "LID"
+        manager: "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"
