@@ -1,17 +1,20 @@
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { ethers, network } from "hardhat";
 import { appConfig } from "./config";
-import { logger } from "./logger";
+import { logger, LogLevel } from "./logger";
 
 export async function getSigners() {
-  logger(5, `Network Name: ${network.name}`);
+  logger(LogLevel.TRACE, `signers.getSigners.Network Name: ${network.name}`);
   if (
     !appConfig.ledger.connect ||
     network.name === "hardhat" ||
     network.name === "localhost"
   ) {
     const hardhatSigners = await ethers.getSigners();
-    logger(5, `Owner account: ${hardhatSigners[0].address}`);
+    logger(
+      LogLevel.TRACE,
+      `signers.getSigners.Owner account: ${hardhatSigners[0].address}`
+    );
     return hardhatSigners;
   }
   return [];
