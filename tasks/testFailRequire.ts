@@ -36,7 +36,7 @@ task(
     console.log("BEFORE: ", ethers.utils.formatEther(balanceBefore), "ETH");
     console.log("AFTER: ", ethers.utils.formatEther(balanceAfter), "ETH");
     console.log(
-      "DIFF: ",
+      "DIFF (expected around 0.00000005654091): ",
       ethers.utils.formatEther(balanceBefore.sub(balanceAfter)),
       "ETH"
     );
