@@ -9,7 +9,8 @@
     "solcopcodes": "solc contratcts/HelloWorld.sol --opcodes",
     "solcasm": "solc contratcts/HelloWorld.sol --asm",
     "solcdevdoc": "solc contratcts/HelloWorld.sol --devdoc",
-    "solcstoragelayout": "solc contratcts/HelloWorld.sol --storage-layout"
+    "solcstoragelayout": "solc contratcts/HelloWorld.sol --storage-layout",
+    "testFailRequire": "npx hardhat testFailRequire --network goerli --account $npm_config_account"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
