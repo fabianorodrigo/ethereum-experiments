@@ -10,6 +10,7 @@ import readlineSync from "readline-sync";
 
 import "./tasks/testFailAssert";
 import "./tasks/testFailRequire";
+import "./tasks/testFailRevert";
 
 dotenv.config();
 

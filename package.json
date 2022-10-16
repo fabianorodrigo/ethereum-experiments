@@ -11,7 +11,8 @@
     "solcdevdoc": "solc contratcts/HelloWorld.sol --devdoc",
     "solcstoragelayout": "solc contratcts/HelloWorld.sol --storage-layout",
     "testFailAssert": "npx hardhat testFailAssert --network goerli --account $npm_config_account",
-    "testFailRequire": "npx hardhat testFailRequire --network goerli --account $npm_config_account"
+    "testFailRequire": "npx hardhat testFailRequire --network goerli --account $npm_config_account",
+    "testFailRevert": "npx hardhat testFailRevert --network goerli --account $npm_config_account"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
