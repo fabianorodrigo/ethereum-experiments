@@ -3,11 +3,24 @@ import * as dotenv from "dotenv";
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomiclabs/hardhat-etherscan";
 import "@typechain/hardhat";
+import colors from "colors";
 import "hardhat-gas-reporter";
 import { HardhatUserConfig } from "hardhat/config";
-import "solidity-coverage";
+import readlineSync from "readline-sync";
 
 dotenv.config();
+
+if (!process.env.MNEMONIC) {
+  process.env.MNEMONIC = readlineSync.question("Wallet seed phrase: ", {
+    hideEchoBack: true, // The typed text on screen is hidden by `*` (default).
+  });
+} else {
+  console.log(
+    colors.yellow(
+      `SECURITY ALERT: Remove the wallet seed phrase from '.env' file and/or Environment Variables`
+    ).bold
+  );
+}
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
@@ -15,6 +28,18 @@ dotenv.config();
 const config: HardhatUserConfig = {
   solidity: "0.8.4",
   networks: {
+    mumbai: {
+      url: process.env.MUMBAI_ALCHEMY_API_KEY_URL || "",
+      accounts: {
+        mnemonic: process.env.MNEMONIC,
+      },
+    },
+    goerli: {
+      url: process.env.GOERLI_ALCHEMY_API_KEY_URL || "",
+      accounts: {
+        mnemonic: process.env.MNEMONIC,
+      },
+    },
     ropsten: {
       url: process.env.ROPSTEN_URL || "",
       accounts:
