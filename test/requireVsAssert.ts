@@ -8,7 +8,7 @@ import {
   IHellowWorldFixture,
 } from "./fixtures/fixtureHelloWorld";
 
-describe.only("HelloWorld", function () {
+describe("HelloWorld", function () {
   let fixture: IHellowWorldFixture;
   beforeEach(async function () {
     // We use loadFixture to run this setup once, snapshot that state,
