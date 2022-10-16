@@ -8,6 +8,7 @@ import "hardhat-gas-reporter";
 import { HardhatUserConfig } from "hardhat/config";
 import readlineSync from "readline-sync";
 
+import "./tasks/testFailAssert";
 import "./tasks/testFailRequire";
 
 dotenv.config();

@@ -10,6 +10,7 @@
     "solcasm": "solc contratcts/HelloWorld.sol --asm",
     "solcdevdoc": "solc contratcts/HelloWorld.sol --devdoc",
     "solcstoragelayout": "solc contratcts/HelloWorld.sol --storage-layout",
+    "testFailAssert": "npx hardhat testFailAssert --network goerli --account $npm_config_account",
     "testFailRequire": "npx hardhat testFailRequire --network goerli --account $npm_config_account"
   },
   "devDependencies": {
