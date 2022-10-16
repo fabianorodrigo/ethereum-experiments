@@ -1,4 +1,4 @@
-import * as colors from "colors";
+import colors from "colors";
 import { appConfig } from "./config";
 
 export enum LogLevel {
@@ -22,8 +22,8 @@ const LOG_COLORS: { [key: string]: Colors } = {
 
 export function logger(level: LogLevel, msg: any) {
   if (level <= appConfig.log) {
-    if (LOG_COLORS[level]) {
-      console.log(colors[LOG_COLORS[level]](msg));
+    if (LOG_COLORS[LogLevel[level]]) {
+      console.log(colors[LOG_COLORS[LogLevel[level]]](msg));
     } else {
       console.log(msg);
     }
