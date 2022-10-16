@@ -18,10 +18,18 @@ task(
     const account = ethers.utils.getAddress(taskArgs.account);
 
     const balanceBefore = await provider.getBalance(account);
+    let tx;
     try {
-      await contract.testFailRequire();
+      // Tivemos que setar o gasLimit para a transação ser efetivamente enviada para a rede da Goerli
+      // Do contrário, a exceção ocorria antes mesmo de enviar, na biblioteca ethers.js:
+      // cannot estimate gas; transaction may fail or may require manual gas limit [ See: https://links.ethers.org/v5-errors-UNPREDICTABLE_GAS_LIMIT ]
+      tx = await contract.testFailRequire({ gasLimit: 30000 });
+      await tx.wait();
     } catch (e) {
-      logger(LogLevel.ERROR, `testFailRequire failed as expected`);
+      logger(
+        LogLevel.ERROR,
+        `testFailRequire failed as expected: ${(e as Error).message}`
+      );
     }
     const balanceAfter = await provider.getBalance(account);
 
